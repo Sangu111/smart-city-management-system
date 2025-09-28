@@ -1,0 +1,43 @@
+# Compiled class files
+*.class
+
+# Log files
+*.log
+
+# Maven target folder
+target/
+!target/smart-city.war
+
+# IDE files
+.classpath
+.project
+.settings/
+*.iml
+*.iws
+*.ipr
+.idea/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Database properties (uncomment next line if you want to exclude sensitive data)
+# src/main/resources/db.properties
+
+# Temporary files
+*.tmp
+*.swp
+*.swo
+
+# Package files
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
