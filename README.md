@@ -1,4 +1,4 @@
-# 🏙️ Sma## 🚀 **Quick Demo Access**t City Manag## 📋 Table of Contentsment System
+# 🏙️ Sma## 🚀 **Quick## 📋 Table of ContentsDemo Access**t City Management System
 
 [![Java](https://img.shields.io/badge/Java-17+-ED8B00?style=for-the-badge&logo=java&logoColor=white)](https://www.oracle.com/java/)
 [![MySQL](https://img.shields.io/badge/MySQL-8.0+-4479A1?style=for-the-badge&logo=mysql&logoColor=white)](https://www.mysql.com/)
