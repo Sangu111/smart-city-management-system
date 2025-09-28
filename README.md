@@ -1,4 +1,4 @@
-# 🏙️ Smart City Management System
+# 🏙️ Sma## 🚀 **Quick Demo Access**t City Manag## 📋 Table of Contentsment System
 
 [![Java](https://img.shields.io/badge/Java-17+-ED8B00?style=for-the-badge&logo=java&logoColor=white)](https://www.oracle.com/java/)
 [![MySQL](https://img.shields.io/badge/MySQL-8.0+-4479A1?style=for-the-badge&logo=mysql&logoColor=white)](https://www.mysql.com/)
@@ -7,7 +7,20 @@
 
 > **Enterprise-grade Java web application for urban infrastructure management, built with modern Java EE technologies and security-first approach.**
 
-## 📋 Table of Contents
+## � **Quick Demo Access**
+
+**Live Application**: http://localhost:8080/smart-city/
+
+| Demo Credentials | Username | Password |
+|------------------|----------|----------|
+| 👨‍💼 **Administrator** | `admin` | `admin123` |
+| 👤 **Citizen User** | `citizen1` | `test123` |
+
+*Ready for immediate testing and evaluation!*
+
+---
+
+## �📋 Table of Contents
 
 - [🎯 Project Overview](#-project-overview)
 - [🏗️ System Architecture](#️-system-architecture)
@@ -286,9 +299,16 @@ $TOMCAT_HOME/bin/startup.bat # Windows
 6. **Access Application**
 ```
 URL: http://localhost:8080/smart-city/
-Admin Login: admin / admin123
-Test User: citizen1 / test123
 ```
+
+### 🎪 Demo Credentials for Testing
+
+| Role | Username | Password | Access Level |
+|------|----------|----------|-------------|
+| **Administrator** | `admin` | `admin123` | Full system access, complaint management, user oversight |
+| **Citizen** | `citizen1` | `test123` | Submit complaints, view personal dashboard |
+
+> **For Microsoft Recruiters**: These demo accounts provide complete access to all application features for comprehensive evaluation.
 
 ## 📁 Project Structure
 

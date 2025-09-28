@@ -182,10 +182,21 @@
             <p>Create your citizen account</p>
         </div>
         
-        <% if (request.getParameter("error") != null) { %>
+        <% 
+            String error = request.getParameter("error");
+            if (error != null) { 
+        %>
             <div class="error-message">
                 <i class="fas fa-exclamation-circle"></i>
-                Registration failed! Username or email might already exist.
+                <% if ("missing_fields".equals(error)) { %>
+                    Please fill in all required fields!
+                <% } else if ("password_mismatch".equals(error)) { %>
+                    Passwords do not match! Please try again.
+                <% } else if ("username_exists".equals(error)) { %>
+                    Username or email already exists! Please choose different credentials.
+                <% } else { %>
+                    Registration failed! Please try again.
+                <% } %>
             </div>
         <% } %>
         
@@ -196,7 +207,7 @@
             </div>
         <% } %>
         
-        <form method="post" action="../register">
+        <form method="post" action="${pageContext.request.contextPath}/register">
             <div class="form-group">
                 <label for="username">Username</label>
                 <div class="input-wrapper">
@@ -222,18 +233,10 @@
             </div>
             
             <div class="form-group">
-                <label for="phone">Phone Number</label>
+                <label for="confirmPassword">Confirm Password</label>
                 <div class="input-wrapper">
-                    <i class="fas fa-phone"></i>
-                    <input type="tel" id="phone" name="phone" placeholder="Your contact number" required>
-                </div>
-            </div>
-            
-            <div class="form-group">
-                <label for="address">Address</label>
-                <div class="input-wrapper">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <textarea id="address" name="address" placeholder="Your residential address" required></textarea>
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required>
                 </div>
             </div>
             

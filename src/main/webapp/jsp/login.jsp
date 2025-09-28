@@ -179,7 +179,7 @@
         
 
         
-        <form method="post" action="../login">
+        <form method="post" action="${pageContext.request.contextPath}/login">
             <div class="form-group">
                 <label for="username">Username</label>
                 <div class="input-wrapper">
