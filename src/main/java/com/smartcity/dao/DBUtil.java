@@ -1,6 +1,7 @@
 package com.smartcity.dao;
 
 import java.io.InputStream;
+import java.net.URI;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -26,18 +27,36 @@ public class DBUtil {
                   (System.getenv("JDBC_DATABASE_URL") != null ? 
                    System.getenv("JDBC_DATABASE_URL") : props.getProperty("db.url"));
             
-            // Convert postgresql:// to jdbc:postgresql:// for Render compatibility
+            // Handle Render DATABASE_URL format: postgresql://user:pass@host/db
             if (dbUrl != null && dbUrl.startsWith("postgresql://")) {
-                dbUrl = "jdbc:" + dbUrl;
-            }
-            
-            url = dbUrl;
-            
-            // If using DATABASE_URL (contains credentials), don't use separate username/password
-            if (System.getenv("DATABASE_URL") != null) {
-                username = null;  // Credentials are in the URL
-                password = null;  // Credentials are in the URL
+                try {
+                    // Parse the URL: postgresql://user:pass@host/database
+                    URI uri = new URI(dbUrl);
+                    String userInfo = uri.getUserInfo();
+                    String host = uri.getHost();
+                    int port = uri.getPort() == -1 ? 5432 : uri.getPort(); // Default PostgreSQL port
+                    String database = uri.getPath().substring(1); // Remove leading /
+                    
+                    // Extract username and password
+                    if (userInfo != null && userInfo.contains(":")) {
+                        String[] credentials = userInfo.split(":");
+                        username = credentials[0];
+                        password = credentials[1];
+                    }
+                    
+                    // Construct proper JDBC URL
+                    url = "jdbc:postgresql://" + host + ":" + port + "/" + database;
+                    
+                } catch (Exception e) {
+                    System.err.println("Error parsing DATABASE_URL: " + e.getMessage());
+                    // Fallback to simple conversion
+                    dbUrl = "jdbc:" + dbUrl;
+                    url = dbUrl;
+                    username = null;
+                    password = null;
+                }
             } else {
+                url = dbUrl;
                 username = System.getenv("JDBC_DATABASE_USER") != null ? 
                           System.getenv("JDBC_DATABASE_USER") : props.getProperty("db.username");
                 password = System.getenv("JDBC_DATABASE_PASSWORD") != null ? 
