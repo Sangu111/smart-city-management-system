@@ -1,4 +1,11 @@
-# 🏙️ smart-city-management-system
+# 🏙️ sma## 🌟 **Quick Demo Access**
+
+**Live Application**: https://smart-city-management-system-nnev.onrender.com
+
+| Demo Credentials | Username | Password |
+|------------------|----------|----------|
+| 👨‍💼 **Administrator** | `admin` | `admin123` |
+| 👤 **Citizen User** | `citizen1` | `test123` |management-system
 
 [![Java](https://img.shields.io/badge/Java-17+-ED8B00?style=for-the-badge&logo=java&logoColor=white)](https://www.oracle.com/java/)
 [![MySQL](https://img.shields.io/badge/MySQL-8.0+-4479A1?style=for-the-badge&logo=mysql&logoColor=white)](https://www.mysql.com/)
@@ -298,7 +305,8 @@ $TOMCAT_HOME/bin/startup.bat # Windows
 
 6. **Access Application**
 ```
-URL: http://localhost:8080/smart-city/
+Local: http://localhost:8080/smart-city/
+Live Demo: https://smart-city-management-system-nnev.onrender.com
 ```
 
 ### 🎪 Demo Credentials for Testing
