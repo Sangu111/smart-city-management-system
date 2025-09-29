@@ -65,16 +65,24 @@ public class DBUtil {
             
             // Auto-detect database driver based on URL
             String driverClass;
-            if (dbUrl != null && dbUrl.startsWith("jdbc:postgresql")) {
+            String originalDbUrl = System.getenv("DATABASE_URL");
+            if (originalDbUrl != null && originalDbUrl.contains("postgres")) {
                 driverClass = "org.postgresql.Driver";
-            } else if (dbUrl != null && dbUrl.startsWith("jdbc:mysql")) {
+                System.out.println("🔌 Loading PostgreSQL driver for Render");
+            } else if (props.getProperty("db.url") != null && props.getProperty("db.url").contains("mysql")) {
                 driverClass = "com.mysql.cj.jdbc.Driver";
+                System.out.println("🔌 Loading MySQL driver for local");
             } else {
-                driverClass = props.getProperty("db.driver");
+                driverClass = "org.postgresql.Driver"; // Default to PostgreSQL for production
+                System.out.println("🔌 Loading PostgreSQL driver (default)");
             }
             
-            if (driverClass != null) {
+            try {
                 Class.forName(driverClass);
+                System.out.println("✅ Driver loaded successfully: " + driverClass);
+            } catch (ClassNotFoundException e) {
+                System.err.println("❌ Failed to load driver: " + driverClass);
+                throw e;
             }
         } catch (ClassNotFoundException | java.io.IOException e) {
             System.err.println("Database initialization error: " + e.getMessage());
