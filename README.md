@@ -1,4 +1,4 @@
-# 🏙️ smart-city-management
+# 🏙️ smart-city-management-system
 
 **Live Application**: https://smart-city-management-system-nnev.onrender.com
 
