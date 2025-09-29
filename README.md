@@ -1,4 +1,4 @@
-# 🏙️ sma## 🌟 **Quick Demo Access**
+# 🏙️ smart-city-management
 
 **Live Application**: https://smart-city-management-system-nnev.onrender.com
 
