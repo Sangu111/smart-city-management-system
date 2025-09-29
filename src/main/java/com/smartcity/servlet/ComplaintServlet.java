@@ -47,12 +47,23 @@ public class ComplaintServlet extends HttpServlet {
             photoPart.write(uploadPath + File.separator + fileName);
             photoUrl = "uploads/" + fileName;
         }
-        Complaint complaint = new Complaint(0, user.getId(), category, title, description, location, photoUrl, "Submitted", "", new Timestamp(System.currentTimeMillis()), new Timestamp(System.currentTimeMillis()));
+        System.out.println("🔄 Processing complaint submission:");
+        System.out.println("   User ID: " + user.getId());
+        System.out.println("   Category: " + category);
+        System.out.println("   Title: " + title);
+        System.out.println("   Description: " + (description != null ? description.substring(0, Math.min(50, description.length())) + "..." : "null"));
+        System.out.println("   Location: " + location);
+        System.out.println("   Photo: " + photoUrl);
+        
+        Complaint complaint = new Complaint(0, user.getId(), category, title, description, location, photoUrl, "pending", "", new Timestamp(System.currentTimeMillis()), new Timestamp(System.currentTimeMillis()));
         ComplaintDAO dao = new ComplaintDAO();
         boolean success = dao.submitComplaint(complaint);
+        
         if (success) {
+            System.out.println("✅ Complaint submitted successfully, redirecting to dashboard");
             response.sendRedirect("complaint?msg=complaint_submitted");
         } else {
+            System.out.println("❌ Complaint submission failed, redirecting to form");
             response.sendRedirect("jsp/complaint_form.jsp?error=submission_failed");
         }
     }
