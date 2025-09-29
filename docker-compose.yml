@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: smartcity-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: Root@123
+      MYSQL_DATABASE: smartcity
+      MYSQL_USER: smartcity_user
+      MYSQL_PASSWORD: smartcity_pass
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./sql:/docker-entrypoint-initdb.d
+    command: --default-authentication-plugin=mysql_native_password
+
+  app:
+    build: .
+    container_name: smartcity-app
+    ports:
+      - "8080:8080"
+    environment:
+      JDBC_DATABASE_URL: "jdbc:mysql://mysql:3306/smartcity?useSSL=false&serverTimezone=UTC"
+      JDBC_DATABASE_USER: "root"
+      JDBC_DATABASE_PASSWORD: "Root@123"
+    depends_on:
+      - mysql
+    restart: unless-stopped
+
+volumes:
+  mysql_data:

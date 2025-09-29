@@ -310,7 +310,72 @@ URL: http://localhost:8080/smart-city/
 
 > **For Microsoft Recruiters**: These demo accounts provide complete access to all application features for comprehensive evaluation.
 
-## 📁 Project Structure
+## � Docker Deployment
+
+### Quick Start with Docker
+
+1. **Prerequisites**
+   - Docker Desktop installed
+   - Docker Compose available
+
+2. **One-Command Deployment**
+```bash
+# For Linux/Mac
+chmod +x deploy.sh
+./deploy.sh
+
+# For Windows PowerShell
+.\deploy.ps1
+```
+
+3. **Manual Docker Commands**
+```bash
+# Build and run with database
+docker-compose up --build -d
+
+# Check status
+docker-compose ps
+
+# View logs
+docker-compose logs -f
+
+# Stop containers
+docker-compose down
+```
+
+4. **Environment Variables for Production**
+```bash
+export JDBC_DATABASE_URL="your-database-url"
+export JDBC_DATABASE_USER="your-username"
+export JDBC_DATABASE_PASSWORD="your-password"
+
+# Run with custom DB
+docker run -p 8080:8080 \
+  -e JDBC_DATABASE_URL="$JDBC_DATABASE_URL" \
+  -e JDBC_DATABASE_USER="$JDBC_DATABASE_USER" \
+  -e JDBC_DATABASE_PASSWORD="$JDBC_DATABASE_PASSWORD" \
+  smart-city-app
+```
+
+### 🌐 Render Deployment
+
+1. **Connect Repository**
+   - Fork/clone this repository
+   - Connect to Render from GitHub
+
+2. **Environment Variables on Render**
+   ```
+   JDBC_DATABASE_URL=your-mysql-url
+   JDBC_DATABASE_USER=your-db-username  
+   JDBC_DATABASE_PASSWORD=your-db-password
+   ```
+
+3. **Render Configuration**
+   - **Build Command**: `docker build -t smart-city .`
+   - **Start Command**: `docker run -p $PORT:8080 smart-city`
+   - **Environment**: Docker
+
+## �📁 Project Structure
 
 ```
 smart-city-management/

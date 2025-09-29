@@ -20,10 +20,25 @@ public class DBUtil {
                 }
                 props.load(in);
             }
-            url = props.getProperty("db.url");
-            username = props.getProperty("db.username");
-            password = props.getProperty("db.password");
-            String driverClass = props.getProperty("db.driver");
+            // Support environment variables with fallback to properties
+            url = System.getenv("DATABASE_URL") != null ? 
+                  System.getenv("DATABASE_URL") : 
+                  (System.getenv("JDBC_DATABASE_URL") != null ? 
+                   System.getenv("JDBC_DATABASE_URL") : props.getProperty("db.url"));
+            username = System.getenv("JDBC_DATABASE_USER") != null ? 
+                      System.getenv("JDBC_DATABASE_USER") : props.getProperty("db.username");
+            password = System.getenv("JDBC_DATABASE_PASSWORD") != null ? 
+                      System.getenv("JDBC_DATABASE_PASSWORD") : props.getProperty("db.password");
+            
+            // Auto-detect database driver based on URL
+            String driverClass;
+            if (url.startsWith("jdbc:postgresql")) {
+                driverClass = "org.postgresql.Driver";
+            } else if (url.startsWith("jdbc:mysql")) {
+                driverClass = "com.mysql.cj.jdbc.Driver";
+            } else {
+                driverClass = props.getProperty("db.driver");
+            }
             
             if (driverClass != null) {
                 Class.forName(driverClass);

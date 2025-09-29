@@ -1,0 +1,15 @@
+# Docker ignore file
+target/
+.git/
+.gitignore
+README.md
+*.md
+.vscode/
+.idea/
+*.iml
+node_modules/
+npm-debug.log*
+.DS_Store
+Thumbs.db
+temp_extract/
+smart-city-demo/
