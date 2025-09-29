@@ -26,11 +26,23 @@ public class DBUtil {
                   (System.getenv("JDBC_DATABASE_URL") != null ? 
                    System.getenv("JDBC_DATABASE_URL") : props.getProperty("db.url"));
             
+            // Convert postgresql:// to jdbc:postgresql:// for Render compatibility
+            if (dbUrl != null && dbUrl.startsWith("postgresql://")) {
+                dbUrl = "jdbc:" + dbUrl;
+            }
+            
             url = dbUrl;
-            username = System.getenv("JDBC_DATABASE_USER") != null ? 
-                      System.getenv("JDBC_DATABASE_USER") : props.getProperty("db.username");
-            password = System.getenv("JDBC_DATABASE_PASSWORD") != null ? 
-                      System.getenv("JDBC_DATABASE_PASSWORD") : props.getProperty("db.password");
+            
+            // If using DATABASE_URL (contains credentials), don't use separate username/password
+            if (System.getenv("DATABASE_URL") != null) {
+                username = null;  // Credentials are in the URL
+                password = null;  // Credentials are in the URL
+            } else {
+                username = System.getenv("JDBC_DATABASE_USER") != null ? 
+                          System.getenv("JDBC_DATABASE_USER") : props.getProperty("db.username");
+                password = System.getenv("JDBC_DATABASE_PASSWORD") != null ? 
+                          System.getenv("JDBC_DATABASE_PASSWORD") : props.getProperty("db.password");
+            }
             
             // Auto-detect database driver based on URL
             String driverClass;
@@ -52,6 +64,11 @@ public class DBUtil {
     }
 
     public static Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(url, username, password);
+        if (username != null && password != null) {
+            return DriverManager.getConnection(url, username, password);
+        } else {
+            // URL contains credentials (like Render DATABASE_URL)
+            return DriverManager.getConnection(url);
+        }
     }
 }
