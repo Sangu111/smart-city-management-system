@@ -15,7 +15,9 @@ public class UserDAO {
     }
     
     private static void initializeDatabase() {
+        System.out.println("🔄 Initializing database...");
         try (Connection conn = DBUtil.getConnection()) {
+            System.out.println("✅ Database connection established");
             // Check if users table exists
             try {
                 PreparedStatement ps = conn.prepareStatement("SELECT COUNT(*) FROM users LIMIT 1");
@@ -23,6 +25,7 @@ public class UserDAO {
                 // Table exists, do nothing
             } catch (SQLException e) {
                 // Table doesn't exist, create it
+                System.out.println("📋 Tables don't exist, creating them...");
                 createTables(conn);
             }
         } catch (Exception e) {
@@ -56,17 +59,25 @@ public class UserDAO {
                 "updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, " +
                 "FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE)");
             
-            // Insert admin user (password: admin123)
-            stmt.execute("INSERT INTO users (username, password, email, role) VALUES " +
-                "('admin', 'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 'admin@smartcity.com', 'admin') " +
-                "ON CONFLICT (username) DO NOTHING");
+            // Insert admin user (password: admin123) - only if not exists
+            try {
+                stmt.execute("INSERT INTO users (username, password, email, role) VALUES " +
+                    "('admin', 'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 'admin@smartcity.com', 'admin')");
+            } catch (SQLException e) {
+                // User already exists, ignore
+            }
             
-            // Insert citizen user (password: test)  
-            stmt.execute("INSERT INTO users (username, password, email, role) VALUES " +
-                "('citizen1', '9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08', 'citizen1@example.com', 'citizen') " +
-                "ON CONFLICT (username) DO NOTHING");
+            // Insert citizen user (password: test) - only if not exists
+            try {
+                stmt.execute("INSERT INTO users (username, password, email, role) VALUES " +
+                    "('citizen1', '9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08', 'citizen1@example.com', 'citizen')");
+            } catch (SQLException e) {
+                // User already exists, ignore
+            }
             
             System.out.println("✅ Database tables created and initialized successfully!");
+            System.out.println("✅ Admin user: admin / admin123");
+            System.out.println("✅ Test user: citizen1 / test");
         }
     }
     
