@@ -31,14 +31,14 @@ CREATE TABLE complaints (
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
--- Insert default admin user
+-- Insert default admin user (password: admin123)
 INSERT INTO users (username, password, email, role) VALUES 
-('admin', 'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 'admin@smartcity.com', 'admin');
+('admin', '240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9', 'admin@smartcity.com', 'admin');
 
--- Insert sample citizen users
+-- Insert sample citizen users (passwords: test, admin123)
 INSERT INTO users (username, password, email, role) VALUES 
 ('citizen1', '9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08', 'citizen1@example.com', 'citizen'),
-('citizen2', 'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 'citizen2@example.com', 'citizen');
+('citizen2', '240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9', 'citizen2@example.com', 'citizen');
 
 -- Insert sample complaints
 INSERT INTO complaints (user_id, category, subject, description, location, status, priority) VALUES 

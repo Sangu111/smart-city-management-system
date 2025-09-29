@@ -19,12 +19,18 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        System.out.println("🔐 Login attempt - Username: " + username + ", Password: " + password);
+        
         UserDAO userDAO = new UserDAO();
         User user = userDAO.getUserByUsername(username);
         
         if (user != null) {
+            System.out.println("👤 User found: " + user.getUsername() + ", Role: " + user.getRole());
             String inputHash = PasswordUtil.hashPassword(password);
             String storedHash = user.getPasswordHash();
+            System.out.println("🔑 Input hash: " + inputHash);
+            System.out.println("🔑 Stored hash: " + storedHash);
+            System.out.println("🔍 Hashes match: " + storedHash.equals(inputHash));
             
             if (storedHash.equals(inputHash)) {
                 HttpSession session = request.getSession();
@@ -38,6 +44,7 @@ public class LoginServlet extends HttpServlet {
                 response.sendRedirect("jsp/login.jsp?error=1");
             }
         } else {
+            System.out.println("❌ User not found: " + username);
             response.sendRedirect("jsp/login.jsp?error=1");
         }
     }

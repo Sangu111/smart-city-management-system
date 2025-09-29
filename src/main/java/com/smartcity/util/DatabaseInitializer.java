@@ -79,7 +79,7 @@ public class DatabaseInitializer implements ServletContextListener {
             // Insert admin user (password: admin123)
             try {
                 stmt.execute("INSERT INTO users (username, password, email, role) VALUES " +
-                    "('admin', 'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 'admin@smartcity.com', 'admin')");
+                    "('admin', '240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9', 'admin@smartcity.com', 'admin')");
                 System.out.println("✅ Admin user created: admin / admin123");
             } catch (SQLException e) {
                 System.out.println("ℹ️ Admin user already exists");
