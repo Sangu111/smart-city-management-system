@@ -41,14 +41,19 @@ public class RegisterServlet extends HttpServlet {
         UserDAO userDAO = new UserDAO();
         
         try {
+            System.out.println("🔄 Attempting to register user: " + username + " with email: " + email);
             boolean success = userDAO.registerUser(user);
             if (success) {
+                System.out.println("✅ Registration successful for: " + username);
                 response.sendRedirect("jsp/login.jsp?msg=registered");
             } else {
+                System.out.println("❌ Registration failed for: " + username + " - user/email already exists");
                 response.sendRedirect("jsp/register.jsp?error=username_exists");
             }
-        } catch (IOException e) {
-            System.err.println("Error during registration redirect: " + e.getMessage());
+        } catch (Exception e) {
+            System.err.println("❌ Error during registration: " + e.getMessage());
+            e.printStackTrace();
+            response.sendRedirect("jsp/register.jsp?error=system_error");
         }
     }
 

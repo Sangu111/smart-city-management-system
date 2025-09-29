@@ -40,15 +40,33 @@ public class UserDAO {
 
     public boolean registerUser(User user) {
         try (Connection conn = DBUtil.getConnection()) {
-            String sql = "INSERT INTO users (username, email, password_hash, role) VALUES (?, ?, ?, ?)";
+            // First check if username or email already exists
+            String checkSql = "SELECT COUNT(*) FROM users WHERE username = ? OR email = ?";
+            PreparedStatement checkPs = conn.prepareStatement(checkSql);
+            checkPs.setString(1, user.getUsername());
+            checkPs.setString(2, user.getEmail());
+            ResultSet rs = checkPs.executeQuery();
+            
+            if (rs.next() && rs.getInt(1) > 0) {
+                System.out.println("User already exists: " + user.getUsername() + " or " + user.getEmail());
+                return false; // User or email already exists
+            }
+            
+            // Insert new user - using correct column name 'password'
+            String sql = "INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, ?)";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, user.getUsername());
             ps.setString(2, user.getEmail());
             ps.setString(3, user.getPasswordHash());
             ps.setString(4, user.getRole());
-            return ps.executeUpdate() > 0;
+            
+            int result = ps.executeUpdate();
+            System.out.println("Registration result for " + user.getUsername() + ": " + (result > 0 ? "SUCCESS" : "FAILED"));
+            return result > 0;
+            
         } catch (SQLException e) {
             System.err.println("Error registering user: " + e.getMessage());
+            e.printStackTrace();
         }
         return false;
     }
@@ -58,7 +76,7 @@ public class UserDAO {
             rs.getInt("id"),
             rs.getString("username"),
             rs.getString("email"),
-            rs.getString("password_hash"),
+            rs.getString("password"), // Fixed: use 'password' not 'password_hash'
             rs.getString("role")
         );
     }
