@@ -2,8 +2,8 @@
 -- This script creates the database schema compatible with PostgreSQL
 
 -- Drop tables if they exist (for fresh deployment)
-DROP TABLE IF EXISTS complaints CASCADE;
-DROP TABLE IF EXISTS users CASCADE;
+DROP TABLE IF EXISTS complaints;
+DROP TABLE IF EXISTS users;
 
 -- Create users table
 CREATE TABLE users (

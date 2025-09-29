@@ -1,5 +1,5 @@
 # Multi-stage Dockerfile for Java EE Web Application
-FROM maven:3.9.5-openjdk-17 AS builder
+FROM maven:3.8.6-openjdk-11 AS builder
 
 # Set working directory
 WORKDIR /app
@@ -12,7 +12,7 @@ COPY src ./src
 RUN mvn clean package -DskipTests
 
 # Production stage
-FROM tomcat:9.0-jdk17
+FROM tomcat:9.0-jdk11
 
 # Remove default ROOT application
 RUN rm -rf /usr/local/tomcat/webapps/ROOT
