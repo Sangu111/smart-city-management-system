@@ -5,6 +5,11 @@
          version="4.0">
     <display-name>Smart City Management System</display-name>
     
+    <!-- Database Initialization Listener -->
+    <listener>
+        <listener-class>com.smartcity.util.DatabaseInitializer</listener-class>
+    </listener>
+    
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
         <welcome-file>jsp/login.jsp</welcome-file>
