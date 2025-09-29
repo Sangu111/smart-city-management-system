@@ -35,12 +35,16 @@ public class LoginServlet extends HttpServlet {
             if (storedHash.equals(inputHash)) {
                 HttpSession session = request.getSession();
                 session.setAttribute("user", user);
+                System.out.println("🎉 Login successful! User role: " + user.getRole());
                 if ("admin".equals(user.getRole())) {
+                    System.out.println("🔄 Redirecting to admin dashboard");
                     response.sendRedirect("admin");
                 } else {
+                    System.out.println("🔄 Redirecting to complaint dashboard");
                     response.sendRedirect("complaint");
                 }
             } else {
+                System.out.println("❌ Password mismatch - redirecting to login");
                 response.sendRedirect("jsp/login.jsp?error=1");
             }
         } else {
