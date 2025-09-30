@@ -235,7 +235,7 @@ The application is deployed on **Render** with the following configuration:
 *Complete complaint management and system oversight*
 
 ### Complaint Submission Form  
-![Complaint Form](Complaint_form.png)
+![Complaint Form](complaint_form.png)
 *Intuitive citizen interface for reporting infrastructure issues*
 
 ## 🎯 Skills Demonstrated
