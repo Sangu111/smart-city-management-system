@@ -3,6 +3,7 @@
 
 # Log files
 *.log
+npm-debug.log*
 
 # Maven target folder
 target/
@@ -16,6 +17,7 @@ target/
 *.iws
 *.ipr
 .idea/
+.vscode/
 
 # OS generated files
 .DS_Store
@@ -41,3 +43,10 @@ Thumbs.db
 *.zip
 *.tar.gz
 *.rar
+
+# Node.js dependencies
+node_modules/
+
+# Temporary folders
+temp_extract/
+smart-city-demo/
