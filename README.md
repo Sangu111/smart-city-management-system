@@ -16,7 +16,7 @@
 | Role | Username | Password | Description |
 |------|----------|----------|-------------|
 | 👨‍💼 **Admin** | `admin` | `admin123` | Full system access, manage complaints, user oversight |
-| 👤 **Citizen** | `citizen1` | `test123` | Submit complaints, view personal dashboard |
+| 👤 **Citizen** | `citizen1` | `test` | Submit complaints, view personal dashboard |
 
 ## 📋 Project Overview
 
