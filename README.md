@@ -45,9 +45,8 @@ Built with enterprise Java technologies, the system provides secure complaint ma
 - **Maven 3.9+** - Build automation and dependency management
 
 ### Frontend  
-- **JSP (JavaServer Pages)** - Server-side rendering and templating
+- **JSP (JavaServer Pages)** - Server-side rendering and dynamic content generation
 - **HTML5/CSS3** - Modern web standards and responsive design
-- **JavaScript (ES6+)** - Client-side interactivity and form validation
 - **FontAwesome** - Professional iconography and UI components
 
 ### Database
@@ -253,8 +252,8 @@ This project showcases comprehensive full-stack development expertise:
 - Database performance optimization and indexing strategies
 
 ### 🌐 **Web Development**
-- Responsive frontend design with HTML5, CSS3, and JavaScript
 - Server-side rendering with JSP and dynamic content generation
+- Responsive frontend design with HTML5 and CSS3
 - Cross-browser compatibility and mobile-responsive layouts
 
 ### 🔒 **Security Implementation**
